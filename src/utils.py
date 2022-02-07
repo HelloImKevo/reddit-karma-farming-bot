@@ -8,7 +8,8 @@ import string
 from config.common_config import ENVAR_PREFIX
 from logs.logger import log
 import urllib.request
-## HELPER VARS
+
+# HELPER VARS
 
 DAY = 86400
 MONTH = 2678400
@@ -16,19 +17,21 @@ YEAR = 31536000
 
 
 def random_string(length: int) -> str:
-  letters = string.ascii_lowercase
-  return ''.join(random.choice(letters) for i in range(length))
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(length))
+
 
 def prefer_envar(configs: dict) -> dict:
-  for config in list(configs):
-    config_envar = f"{ENVAR_PREFIX}{config}".lower()
-    if os.environ.get(config_envar):
-      configs[config]=os.environ.get(config_envar)
-      log.info(f"loading {config_envar} from envar. Value: {configs.get(config)}")
-    else:
-      log.debug(f"no environment config for: {config_envar}")
+    for config in list(configs):
+        config_envar = f"{ENVAR_PREFIX}{config}".lower()
+        if os.environ.get(config_envar):
+            configs[config] = os.environ.get(config_envar)
+            log.info(f"loading {config_envar} from envar. Value: {configs.get(config)}")
+        else:
+            log.debug(f"no environment config for: {config_envar}")
 
-  return configs
+    return configs
+
 
 # Checks if the machine has internet and also can connect to reddit
 def check_internet(host="https://reddit.com", timeout=5):
@@ -55,7 +58,7 @@ def bytesto(bytes, to, bsize=1024):
           print('mb= ' + str(bytesto(314575262000000, 'm')))
       sample output:
           mb= 300002347.946
-  """
+    """
 
     a = {"k": 1, "m": 2, "g": 3, "t": 4, "p": 5, "e": 6}
     r = float(bytes)
@@ -84,7 +87,6 @@ def chance(value=.20):
     return rando < value
 
 
-
 def tobytes(size_str):
     """Convert human filesizes to bytes.
     https://stackoverflow.com/questions/44307480/convert-size-notation-with-units-100kb-32mb-to-number-of-bytes-in-python
@@ -101,12 +103,12 @@ def tobytes(size_str):
     :return: The number of bytes represented by the string.
     """
     multipliers = {
-        'kilobyte':  1024,
-        'megabyte':  1024 ** 2,
-        'gigabyte':  1024 ** 3,
+        'kilobyte': 1024,
+        'megabyte': 1024 ** 2,
+        'gigabyte': 1024 ** 3,
         'kb': 1024,
-        'mb': 1024**2,
-        'gb': 1024**3,
+        'mb': 1024 ** 2,
+        'gb': 1024 ** 3,
     }
 
     for suffix in multipliers:
