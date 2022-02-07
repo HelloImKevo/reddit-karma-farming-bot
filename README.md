@@ -48,6 +48,18 @@ Website: https://bit.ly/mrps-site
 - Schedule when the bot wakes up and sleeps to run actions.
 - Auto detects if the account is shadowbanned.
 
+## PyCharm Interpreter Setup
+
+To fix "unresolved references" errors in individual python packages, you'll need to right-click directories with
+module imports, and select "Mark Directory As... Sources Root".  
+
+Inspect the `.idea/misc.xml` file and confirm that the jdk-name is "Python 3.7", and not "Python 3.7 (Project Name)".  
+
+Inspect the `.idea/Project.iml` file and confirm there is an order entry for:  
+```
+<orderEntry type="jdk" jdkName="Python 3.7" jdkType="Python SDK" />
+```
+
 ## Warnings
 
 ### Reddit
