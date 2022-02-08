@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
-from .sources.cobe import Cobe
+from .sources.cobe_impl import Cobe
 from logs.logger import log
 from collections import namedtuple
 from utils import chance

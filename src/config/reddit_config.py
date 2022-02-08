@@ -1,26 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
-from utils import prefer_envar
-from logs.logger import log
-from logs.log_utils import log_json
-from config.reddit.reddit_sub_lists import REDDIT_APPROVED_SUBS
+from config.authentication import AUTH
+from config.authentication import init_auth
 from config.reddit.config_gen import config_gen
-import sys
-import json
-import os
+from config.reddit.reddit_sub_lists import REDDIT_APPROVED_SUBS
+from logs.log_utils import log_json
+from logs.logger import log
+from utils import prefer_envar
 
-AUTH = prefer_envar({
-  # app creds
-  "reddit_client_id":"",
-  "reddit_client_secret":"",
-  # reddit account creds
-  "reddit_username":"",
-  "reddit_password":"",
-})
+log.info('initializing AUTH credentials')
+
+init_auth()
 
 for key in AUTH:
   if AUTH[key] == "":
-    # reddit auth not configured correctly. 
+    # reddit auth not configured correctly.
     # instruct user to generate a .env file
     config_gen()
 
@@ -40,7 +34,7 @@ CONFIG = prefer_envar({
   "reddit_remove_low_scores": 0.002,
   # posts/comments that get downvoted to this score will be deleted
   "reddit_low_score_threshold": 0,
-  # chance to check if the bot is shadowbanned, 
+  # chance to check if the bot is shadowbanned,
   # and shut down the script automatically
   "reddit_shadowban_check": 0.002,
   # list of subreddits for the bot to use
@@ -57,7 +51,7 @@ CONFIG = prefer_envar({
   "reddit_sleep_schedule": [2, 4],
   # Frequency to check if the bot hit karma limits
   "reddit_karma_limit_check": 0.002,
-  # Set to integer with the max comment karma 
+  # Set to integer with the max comment karma
   # before the bot shuts down. Set as None to ignore
   "reddit_comment_karma_limit": None,
   # Set to integer with the max post/submission karma
@@ -65,4 +59,4 @@ CONFIG = prefer_envar({
   "reddit_post_karma_limit": None,
 })
 
-log.info(f"REDDIT CONNFIG:\n {log_json(CONFIG)}")
+log.info(f"REDDIT CONFIG:\n {log_json(CONFIG)}")
